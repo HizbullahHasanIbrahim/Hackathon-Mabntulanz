@@ -1,753 +1,1469 @@
-/* Ganti warna di sini, semua bagian halaman ikut berubah */
-:root {
-  /* LIGHT MODE - Affordable Luxury Palette */
-  --utama: #c5a059; /* Champagne Gold / Warm Bronze */
-  --teks: #1a1918; /* Rich Obsidian / Charcoal */
-  --redup: #6e6a66; /* Warm Muted Gray */
-  --latar: #fafaf7; /* Warm Ivory */
-  --kartu: #ffffff; /* Clean Soft White */
-  --garis: #e6e2dd; /* Warm Border Light */
+/* ==========================================================================
+   APPLE CUPERTINO GLASSMORPHISM — DESERT TITANIUM EDITION
+   Cukup ganti file style.css ini tanpa mengubah index.html & script.js
+   ========================================================================== */
 
-  /* New design tokens */
-  --gold: #c5a059;
-  --bronze: #8b7355;
-  --emerald: #5a8a7a;
-  --ivory: #fafaf7;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.12);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+:root {
+  /* PALET WARNA LIGHT MODE (Apple Silver-White & Desert Titanium) */
+  --utama: #a47e3b; /* Warna aksen utama: Emas Titanium khas lini Apple Pro */
+  --utama-terang: #c9a461; /* Warna aksen sekunder untuk gradasi halus */
+  --teks: #1d1d1f; /* Hitam arang khas tipografi utama Apple */
+  --redup: #6e6e73; /* Abu-abu netral khas teks sekunder Apple */
+  --latar: #f5f5f7; /* Abu-abu perak terang khas latar belakang halaman Apple */
+  --kartu: rgba(255, 255, 255, 0.68); /* Latar kartu kaca transparan (68% putih) */
+  --kartu-solid: #ffffff; /* Latar putih solid untuk elemen dalam/kontras tinggi */
+  --garis: rgba(0, 0, 0, 0.08); /* Garis batas luar yang sangat tipis dan lembut */
+  --garis-kaca: rgba(255, 255, 255, 0.85); /* Pantulan cahaya di tepi dalam kaca (specular highlight) */
+
+  /* TOKEN DESAIN & EFEK KACA (GLASSMORPHISM) */
+  --gold: #a47e3b; /* Token warna emas titanium */
+  --bronze: #7d5f32; /* Token warna perunggu gelap untuk kedalaman gradasi */
+  --emerald: #34c759; /* Hijau sistem Apple untuk indikator positif */
+  --ivory: #f5f5f7; /* Warna dasar terang */
+  --blur-kaca: blur(24px) saturate(180%); /* Efek buram kaca + peningkat saturasi warna khas macOS/iOS */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.03), inset 0 1px 0 var(--garis-kaca); /* Bayangan halus + kilau tepi atas kaca */
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 var(--garis-kaca); /* Bayangan medium saat kartu mengambang */
+  --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.1), inset 0 1px 0 var(--garis-kaca); /* Bayangan dalam untuk efek melayang dramatis */
+  --radius-sm: 12px; /* Sudut membulat kecil (input & tombol kecil) */
+  --radius-md: 20px; /* Sudut membulat sedang ala widget iOS */
+  --radius-lg: 28px; /* Sudut membulat besar ala jendela macOS/visionOS */
+  --radius-pill: 980px; /* Sudut kapsul penuh khas tombol CTA Apple */
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Kurva animasi pegas lembut khas Apple */
+}
+
+/* PALET WARNA DARK MODE (Apple OLED Space Black & Glowing Gold) */
+[data-theme="dark"] {
+  --utama: #dec07c; /* Emas titanium cerah agar kontras di atas latar hitam */
+  --utama-terang: #f3dfb1; /* Emas sampanye terang untuk teks gradasi */
+  --teks: #f5f5f7; /* Putih perak lembut agar mata tidak cepat lelah di layar gelap */
+  --redup: #86868b; /* Abu-abu metalik untuk teks penjelas di mode gelap */
+  --latar: #000000; /* Hitam murni (OLED Black) khas halaman produk Apple Pro */
+  --kartu: rgba(28, 28, 30, 0.62); /* Kaca gelap transparan khas antarmuka iOS Dark Mode */
+  --kartu-solid: #1c1c1e; /* Abu-abu gelap solid untuk bidang input/elemen dalam */
+  --garis: rgba(255, 255, 255, 0.12); /* Garis tepi kaca tipis yang memantulkan sedikit cahaya */
+  --garis-kaca: rgba(255, 255, 255, 0.14); /* Kilau sudut atas kaca pada mode gelap */
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 var(--garis-kaca); /* Bayangan kartu mode gelap */
+  --shadow-md: 0 16px 36px rgba(0, 0, 0, 0.6), inset 0 1px 0 var(--garis-kaca); /* Bayangan mengambang mode gelap */
+  --shadow-lg: 0 28px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 var(--garis-kaca); /* Bayangan dalam mode gelap */
+}
+
+/* PENGATURAN DASAR HALAMAN */
+html {
+  scroll-behavior: smooth; /* Efek gulir (scroll) mulus saat klik menu navigasi */
+  scroll-padding-top: 84px; /* Jarak aman berhenti saat scroll agar tidak tertutup navbar */
 }
 
 :focus-visible {
-  outline: 2px solid var(--utama);
-  outline-offset: 2px;
-}
-
-#faq details summary::-webkit-details-marker {
-  display: none;
-}
-#faq details summary {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#faq details summary::after {
-  content: "＋";
-  color: var(--utama);
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: transform 0.3s ease;
-}
-#faq details[open] summary::after {
-  content: "－";
+  outline: 2px solid var(--utama); /* Lingkaran fokus aksesibilitas saat navigasi memakai tombol Tab */
+  outline-offset: 3px; /* Jarak garis fokus dari tepi elemen */
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Memastikan padding dan border tidak menambah lebar elemen di luar ukuran seharusnya */
 }
 
 body {
-  margin: 0;
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
-  color: var(--teks);
-  background: var(--latar);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  transition:
-    background-color 0.35s ease,
-    color 0.35s ease;
+  margin: 0; /* Menghapus margin bawaan browser */
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Plus Jakarta Sans", sans-serif; /* Prioritas font sistem Apple (SF Pro) lalu Inter */
+  color: var(--teks); /* Warna teks utama mengikuti tema aktif */
+  background-color: var(--latar); /* Warna dasar halaman */
+  background-image: 
+    radial-gradient(circle at 15% 10%, color-mix(in srgb, var(--utama) 12%, transparent), transparent 40%),
+    radial-gradient(circle at 85% 35%, color-mix(in srgb, var(--utama) 9%, transparent), transparent 45%),
+    radial-gradient(circle at 50% 80%, color-mix(in srgb, var(--utama) 10%, transparent), transparent 50%); /* Cahaya ambient lembut di latar agar efek blur kaca terlihat hidup */
+  background-attachment: fixed; /* Cahaya latar tetap diam saat halaman di-scroll (efek kedalaman kaca) */
+  line-height: 1.6; /* Jarak antarbaris yang lega dan nyaman dibaca */
+  letter-spacing: -0.011em; /* Kerapatan huruf presisi ala tipografi Apple */
+  -webkit-font-smoothing: antialiased; /* Menghaluskan tepi huruf pada layar Retina/macOS */
+  -moz-osx-font-smoothing: grayscale; /* Menghaluskan render font pada Firefox */
+  overflow-x: hidden; /* Mencegah halaman bergeser ke samping secara tidak sengaja */
+  transition: background-color 0.4s ease, color 0.4s ease; /* Transisi mulus saat berganti Light/Dark mode */
 }
 
+/* TIPOGRAFI KHAS APPLE KEYNOTE */
 h1,
 h2,
 h3,
 h4,
 .merek {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif; /* Font modern geometris untuk judul */
+  font-optical-sizing: auto; /* Penyesuaian proporsi huruf otomatis berdasarkan ukuran */
+  font-weight: 700; /* Ketebalan judul tegas */
+  letter-spacing: -0.03em; /* Spasi huruf rapat khas headline produk Apple */
+  line-height: 1.12; /* Jarak baris judul rapat dan padat */
+  color: var(--teks); /* Warna judul mengikuti tema */
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem); /* Ukuran judul utama responsif (membesar otomatis di layar lebar) */
+  font-weight: 800; /* Ketebalan ekstra untuk kesan megah di Hero */
 }
+
 h2 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(1.85rem, 4vw, 2.75rem); /* Ukuran sub-judul tiap section */
+  text-align: center; /* Posisi judul section di tengah seperti halaman Apple */
+  margin-bottom: 48px; /* Jarak bawah judul ke konten di bawahnya */
+  background: linear-gradient(180deg, var(--teks) 0%, color-mix(in srgb, var(--teks) 68%, var(--redup)) 100%); /* Gradasi vertikal halus pada teks judul */
+  -webkit-background-clip: text; /* Memotong gradasi mengikuti bentuk huruf */
+  -webkit-text-fill-color: transparent; /* Membuat warna asli teks transparan agar gradasi terlihat */
 }
+
 h3 {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.45rem); /* Ukuran judul kartu */
 }
 
 .wadah {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px;
+  max-width: 1060px; /* Lebar maksimal kontainer konten agar proporsional di tengah layar */
+  margin: 0 auto; /* Posisi kontainer rata tengah secara horizontal */
+  padding: 0 22px; /* Ruang aman kiri-kanan pada layar HP maupun desktop */
 }
 
-/* Dark Mode variables */
-[data-theme="dark"] {
-  --utama: #d4af37; /* Elegance Gold */
-  --teks: #f4f1ea; /* Ivory Text */
-  --redup: #a39e93; /* Soft Warm Gray */
-  --latar: #0f0e0d; /* Deep Onyx */
-  --kartu: #191816; /* Dark Velvet Card */
-  --garis: #2d2a26; /* Border Dark */
+.teks-redup {
+  color: var(--redup); /* Warna teks sekunder/abu-abu */
+  margin-top: 6px; /* Jarak atas tipis */
 }
 
-/* Header */
+.teks-emas {
+  color: var(--utama); /* Warna aksen emas titanium */
+  font-weight: 700; /* Penebalan pada angka/harga penting */
+}
+
+/* ==========================================================================
+   HEADER & NAVBAR (macOS Frosted Menu Bar)
+   ========================================================================== */
 .atas {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid var(--garis);
-  background: color-mix(in srgb, var(--kartu) 82%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition:
-    background-color 0.35s ease,
-    border-color 0.35s ease;
-}
-.atas .wadah {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-.merek {
-  color: var(--utama);
-  font-weight: 700;
-  font-size: 20px;
-  text-decoration: none;
-  transition: var(--transition);
-}
-.merek:hover {
-  transform: scale(1.02);
-}
-.atas nav {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.atas nav a {
-  color: var(--teks);
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  padding: 4px 0;
-  transition: var(--transition);
-}
-.atas nav a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--utama);
-  transition: width 0.3s ease;
-}
-.atas nav a:hover::after {
-  width: 100%;
-}
-.atas nav a.tombol {
-  color: #fff;
-}
-.atas nav a.tombol::after {
-  display: none;
-}
-.theme-toggle {
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  background: transparent;
-  border: 1px solid var(--garis);
-  color: var(--teks);
-  border-radius: 50%;
-}
-.theme-toggle:hover {
-  background: color-mix(in srgb, var(--utama) 14%, transparent);
-  border-color: var(--utama);
-  color: var(--utama);
-}
-.theme-toggle svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.theme-toggle .icon-moon {
-  display: none;
-}
-[data-theme="dark"] .theme-toggle .icon-sun {
-  display: none;
-}
-[data-theme="dark"] .theme-toggle .icon-moon {
-  display: block;
+  position: sticky; /* Navbar menempel di bagian atas layar saat di-scroll */
+  top: 0; /* Menempel tepat di batas atas 0px */
+  z-index: 100; /* Memastikan navbar selalu berada di lapisan paling atas */
+  border-bottom: 1px solid var(--garis); /* Garis pembatas bawah setipis kaca */
+  background: color-mix(in srgb, var(--kartu) 78%, transparent); /* Warna kaca semi-transparan */
+  backdrop-filter: var(--blur-kaca); /* Efek blur kaca buram di belakang navbar */
+  -webkit-backdrop-filter: var(--blur-kaca); /* Dukungan efek blur kaca untuk browser Safari */
+  transition: var(--transition); /* Animasi halus saat tema berubah */
 }
 
-/* Hero */
-.hero {
-  background: linear-gradient(
-    135deg,
-    var(--utama) 0%,
-    color-mix(in srgb, var(--utama) 72%, #111111) 100%
-  );
-  color: #fff;
-  padding: 80px 0;
-  text-align: center;
-  margin-bottom: 48px;
-  position: relative;
-  overflow: hidden;
+.atas .wadah {
+  display: flex; /* Menyusun logo dan menu berjajar ke samping */
+  justify-content: space-between; /* Logo di kiri, deretan menu di kanan */
+  align-items: center; /* Posisi vertikal sejajar di tengah */
+  flex-wrap: wrap; /* Membungkus baris jika layar terlalu sempit */
+  gap: 12px; /* Jarak aman antar grup di navbar */
+  min-height: 60px; /* Tinggi standar navbar bergaya Apple */
+  padding-top: 10px; /* Jarak dalam atas navbar */
+  padding-bottom: 10px; /* Jarak dalam bawah navbar */
 }
+
+.merek {
+  color: var(--teks); /* Warna teks logo mengikuti kontras utama */
+  font-weight: 800; /* Ketebalan ekstra untuk identitas brand */
+  font-size: 1.1rem; /* Ukuran teks brand minimalis elegan */
+  letter-spacing: 0.08em; /* Spasi antarhuruf renggang khas rumah parfum mewah */
+  text-decoration: none; /* Menghilangkan garis bawah link */
+  transition: var(--transition); /* Animasi halus saat kursor diarahkan */
+}
+
+.merek:hover {
+  color: var(--utama); /* Berubah menjadi emas titanium saat di-hover */
+}
+
+.atas nav {
+  display: flex; /* Menyusun item tautan navigasi berderet secara horizontal */
+  align-items: center; /* Rata tengah secara vertikal */
+  flex-wrap: wrap; /* Turun ke baris baru dengan rapi di layar kecil */
+  gap: 6px; /* Jarak antartautan navigasi */
+}
+
+.atas nav a {
+  color: var(--redup); /* Tautan menu berwarna abu-abu lembut saat tidak aktif */
+  text-decoration: none; /* Tanpa garis bawah standar */
+  font-weight: 500; /* Ketebalan medium yang bersih */
+  font-size: 0.85rem; /* Ukuran teks navigasi ringkas ala Apple.com (13.6px) */
+  padding: 6px 12px; /* Area klik berbentuk kapsul di sekeliling teks menu */
+  border-radius: var(--radius-pill); /* Membuat highlight menu berbentuk kapsul */
+  transition: var(--transition); /* Transisi perubahan warna dan latar yang halus */
+}
+
+.atas nav a:hover {
+  color: var(--teks); /* Warna teks menjadi tajam saat didekati kursor */
+  background: color-mix(in srgb, var(--teks) 6%, transparent); /* Efek latar kaca tipis saat di-hover */
+}
+
+.atas nav a.nav-active {
+  color: var(--teks); /* Warna teks aktif lebih tegas */
+  font-weight: 600; /* Sedikit lebih tebal saat berada di section terkait */
+  background: color-mix(in srgb, var(--utama) 16%, transparent); /* Kapsul penanda menu aktif berwarna emas lembut */
+}
+
+.atas nav a.tombol {
+  color: #ffffff; /* Teks putih untuk tombol CTA "Daftar" di kanan navbar */
+  background: var(--teks); /* Latar tombol kontras tinggi ala tombol "Buy" Apple */
+  padding: 7px 16px; /* Ruang dalam tombol kapsul */
+  font-weight: 600; /* Ketebalan teks tombol */
+  margin-left: 4px; /* Sedikit jarak pemisah dari tombol dark mode */
+}
+
+[data-theme="dark"] .atas nav a.tombol {
+  background: var(--utama); /* Pada mode gelap, tombol CTA berwarna emas titanium */
+  color: #000000; /* Teks hitam pekat di atas tombol emas agar sangat terbaca */
+}
+
+/* TOMBOL SWITCH TEMA (Light / Dark Mode) */
+.theme-toggle {
+  width: 34px; /* Lebar tombol bulat ikon tema */
+  height: 34px; /* Tinggi tombol bulat ikon tema */
+  padding: 0; /* Menghapus padding bawaan tombol */
+  display: grid; /* Menggunakan grid untuk menengahkan ikon SVG */
+  place-items: center; /* Ikon tepat di titik tengah lingkaran */
+  background: color-mix(in srgb, var(--teks) 5%, transparent); /* Latar kaca tipis pada tombol */
+  border: 1px solid var(--garis); /* Garis tepi halus */
+  color: var(--teks); /* Warna ikon mengikuti warna teks */
+  border-radius: 50%; /* Bentuk lingkaran sempurna */
+  cursor: pointer; /* Mengubah kursor menjadi tangan saat diarahkan */
+  transition: var(--transition); /* Animasi rotasi & warna yang halus */
+}
+
+.theme-toggle:hover {
+  background: color-mix(in srgb, var(--utama) 18%, transparent); /* Latar berubah keemasan saat di-hover */
+  border-color: var(--utama); /* Garis tepi menyala emas */
+  color: var(--utama); /* Ikon berubah warna menjadi emas */
+  transform: scale(1.06); /* Sedikit membesar dengan halus */
+}
+
+.theme-toggle svg {
+  width: 16px; /* Ukuran lebar ikon matahari/bulan */
+  height: 16px; /* Ukuran tinggi ikon matahari/bulan */
+  fill: none; /* Bagian dalam ikon transparan (hanya garis luar) */
+  stroke: currentColor; /* Warna garis mengikuti properti color tombol */
+  stroke-width: 1.8; /* Ketebalan garis ikon */
+  stroke-linecap: round; /* Ujung garis membulat halus */
+  stroke-linejoin: round; /* Sudut pertemuan garis membulat */
+}
+
+.theme-toggle .icon-moon {
+  display: none; /* Sembunyikan ikon bulan saat mode terang aktif */
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: none; /* Sembunyikan ikon matahari saat mode gelap aktif */
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: block; /* Tampilkan ikon bulan saat mode gelap aktif */
+}
+
+/* ==========================================================================
+   HERO SECTION (Apple Keynote Stage & Frosted Pills)
+   ========================================================================== */
+.hero {
+  padding: 108px 0 88px; /* Ruang atas dan bawah yang lega khas panggung presentasi Apple */
+  text-align: center; /* Semua elemen Hero rata tengah */
+  margin-bottom: 72px; /* Jarak ke section berikutnya */
+  position: relative; /* Menjadi acuan posisi untuk efek cahaya latar */
+  overflow: hidden; /* Memotong pendaran cahaya agar tidak keluar dari batas section */
+  border-bottom: 1px solid var(--garis); /* Garis pemisah tipis di bawah area Hero */
+  background: 
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--utama) 22%, transparent), transparent 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--kartu-solid) 40%, transparent) 0%, transparent 100%); /* Sorotan lampu panggung dari tengah atas */
+}
+
 .hero::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  content: ""; /* Elemen pseudo untuk membuat bola cahaya ambient yang bergerak halus */
+  position: absolute; /* Posisi bebas di belakang teks Hero */
+  top: -35%; /* Posisi di bagian atas panggung */
+  left: 50%; /* Titik tengah horizontal */
+  width: 680px; /* Diameter bola cahaya */
+  height: 680px; /* Tinggi bola cahaya */
+  transform: translateX(-50%); /* Menengahkan bola cahaya secara presisi */
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 60%
-  );
-  animation: heroFloat 20s ease-in-out infinite;
+    color-mix(in srgb, var(--utama) 20%, transparent) 0%,
+    transparent 68%
+  ); /* Gradasi pendaran emas titanium lembut */
+  filter: blur(40px); /* Melembutkan pendaran cahaya */
+  pointer-events: none; /* Mencegah elemen dekorasi menghalangi klik mouse */
+  animation: heroFloat 14s ease-in-out infinite alternate; /* Animasi bernapas/mengambang perlahan */
 }
+
 @keyframes heroFloat {
-  0%,
+  0% {
+    transform: translate(-50%, 0) scale(1); /* Posisi awal bola cahaya */
+  }
   100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(30px, -30px);
+    transform: translate(-46%, 24px) scale(1.12); /* Bergerak lembut dan sedikit membesar */
   }
 }
+
 .hero .wadah {
-  position: relative;
-  z-index: 1;
+  position: relative; /* Memastikan teks berada di depan lapisan cahaya */
+  z-index: 1; /* Lapisan di atas pseudo-element ::before */
 }
+
+.hero-kicker {
+  display: inline-block; /* Membuat ukuran badge mengikuti panjang teks */
+  font-size: 0.75rem; /* Ukuran teks kecil yang rapi (12px) */
+  text-transform: uppercase; /* Huruf kapital semua */
+  letter-spacing: 0.14em; /* Jarak antarhuruf lebar untuk kesan eksklusif */
+  font-weight: 700; /* Teks tebal */
+  color: var(--utama); /* Warna emas titanium */
+  padding: 7px 16px; /* Ruang dalam kapsul label atas */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh */
+  background: var(--kartu); /* Latar kaca buram */
+  border: 1px solid color-mix(in srgb, var(--utama) 35%, var(--garis)); /* Bingkai kaca keemasan tipis */
+  backdrop-filter: var(--blur-kaca); /* Efek blur kaca di belakang badge */
+  -webkit-backdrop-filter: var(--blur-kaca); /* Dukungan Safari */
+  box-shadow: var(--shadow-sm); /* Bayangan halus + kilau tepi kaca */
+  margin-bottom: 24px; /* Jarak ke judul utama H1 */
+}
+
 .hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  margin: 0 0 16px;
-  font-weight: 800;
+  max-width: 860px; /* Membatasi lebar judul agar turun baris dengan proporsi estetis */
+  margin: 0 auto 20px; /* Rata tengah dengan jarak bawah 20px */
+  background: linear-gradient(135deg, var(--teks) 30%, var(--utama) 100%); /* Gradasi mewah dari warna teks ke emas titanium */
+  -webkit-background-clip: text; /* Memotong latar gradasi sesuai bentuk teks */
+  -webkit-text-fill-color: transparent; /* Menampilkan gradasi pada huruf H1 */
 }
+
 .hero p {
-  margin: 0 auto 24px;
-  max-width: 560px;
-  opacity: 0.95;
-  font-size: 1.125rem;
+  margin: 0 auto 36px; /* Rata tengah dengan jarak bawah ke grup tombol */
+  max-width: 600px; /* Lebar paragraf optimal agar nyaman dibaca sekilas */
+  color: var(--redup); /* Warna abu-abu elegan khas sub-headline Apple */
+  font-size: clamp(1.05rem, 2vw, 1.25rem); /* Ukuran deskripsi Hero yang proporsional */
+  font-weight: 400; /* Ketebalan normal yang bersih */
 }
+
+.hero-cta-group {
+  display: flex; /* Menyusun dua tombol Hero secara berdampingan */
+  justify-content: center; /* Posisi tombol di tengah layar */
+  gap: 14px; /* Jarak antara tombol utama dan tombol kedua */
+  flex-wrap: wrap; /* Turun baris jika layar sangat kecil */
+}
+
 .hero .tombol {
-  background: #fff;
-  color: var(--utama);
-  box-shadow: var(--shadow-lg);
-  transition: var(--transition);
+  background: var(--utama); /* Tombol utama berwarna emas titanium */
+  color: #ffffff; /* Teks putih bersih */
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--utama) 35%, transparent); /* Pendaran bayangan berwarna emas di bawah tombol */
 }
-.hero .tombol:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+[data-theme="dark"] .hero .tombol {
+  color: #000000; /* Teks hitam pekat di atas emas saat mode gelap */
 }
+
+.hero .tombol.tombol-outline {
+  background: var(--kartu); /* Latar kaca transparan untuk tombol sekunder */
+  color: var(--teks); /* Warna teks mengikuti tema */
+  border: 1px solid var(--garis); /* Garis tepi kaca tipis */
+  backdrop-filter: var(--blur-kaca); /* Efek blur kaca buram pada tombol */
+  -webkit-backdrop-filter: var(--blur-kaca); /* Dukungan Safari */
+  box-shadow: var(--shadow-sm); /* Kilau halus di tepi atas tombol kaca */
+}
+
+.hero .tombol.tombol-outline:hover {
+  border-color: var(--utama); /* Garis tepi menyala emas saat disentuh kursor */
+  background: color-mix(in srgb, var(--utama) 12%, var(--kartu)); /* Latar kaca sedikit berubah keemasan */
+}
+
 .hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: clamp(16px, 4vw, 48px);
-  margin-top: 40px;
-  flex-wrap: wrap;
+  display: flex; /* Menyusun 4 kapsul metrik secara sejajar */
+  justify-content: center; /* Posisi rata tengah */
+  gap: 12px; /* Jarak antarkapsul statistik */
+  margin-top: 56px; /* Jarak dari tombol CTA ke deretan statistik */
+  flex-wrap: wrap; /* Otomatis menyusun ulang di layar HP */
 }
+
 .stat {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 8px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font tegas untuk angka dan klaim utama */
+  font-weight: 600; /* Ketebalan semi-bold */
+  font-size: 0.82rem; /* Ukuran teks ringkas dan rapi */
+  color: var(--teks); /* Warna teks kontras */
+  padding: 10px 20px; /* Ruang dalam kapsul kaca */
+  border: 1px solid var(--garis); /* Bingkai luar kaca tipis */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh */
+  background: var(--kartu); /* Permukaan kaca transparan */
+  backdrop-filter: var(--blur-kaca); /* Efek buram pada tiap kapsul statistik */
+  -webkit-backdrop-filter: var(--blur-kaca); /* Dukungan Safari */
+  box-shadow: var(--shadow-sm); /* Bayangan lembut & pantulan cahaya atas */
+  transition: var(--transition); /* Animasi halus saat kursor lewat */
 }
 
-/* Konten */
+.stat:hover {
+  transform: translateY(-3px); /* Kapsul terangkat sedikit saat di-hover */
+  border-color: color-mix(in srgb, var(--utama) 50%, var(--garis)); /* Tepi kapsul berkilau emas */
+}
+
+/* ==========================================================================
+   STRUKTUR SECTION & KARTU KACA UMUM (Glass Cards)
+   ========================================================================== */
 main > section.wadah {
-  margin-bottom: 96px;
-}
-h2 {
-  text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 112px; /* Jarak vertikal antar-section yang lega khas desain Apple */
 }
 
+.kartu,
+.transparansi-box,
+.badge,
+.timeline-content,
+.portfolio-card,
+#faq details {
+  background: var(--kartu); /* Menggunakan permukaan kaca semi-transparan di semua kartu */
+  backdrop-filter: var(--blur-kaca); /* Efek buram kaca (frosted glass) */
+  -webkit-backdrop-filter: var(--blur-kaca); /* Dukungan penuh Safari macOS/iOS */
+  border: 1px solid var(--garis); /* Garis tepi luar yang halus */
+  border-radius: var(--radius-lg); /* Sudut membulat elegan (28px) */
+  box-shadow: var(--shadow-sm); /* Bayangan dasar + pantulan kaca atas */
+  transition: var(--transition); /* Transisi mulus untuk semua interaksi hover */
+}
+
+/* ==========================================================================
+   PROFIL PERUSAHAAN & TRANSPARANSI HARGA
+   ========================================================================== */
 .profil-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 48px;
-  align-items: center;
+  display: grid; /* Layout 2 kolom untuk teks filosofi dan kartu tim */
+  grid-template-columns: 1.45fr 1fr; /* Kolom kiri lebih lebar dari kolom kanan */
+  gap: 36px; /* Jarak antar kolom */
+  align-items: center; /* Rata tengah secara vertikal */
 }
+
 .profil-tagline {
-  color: var(--utama);
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 700;
-  font-size: 1.25rem;
+  color: var(--utama); /* Tagline berwarna emas titanium */
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font judul */
+  font-weight: 700; /* Teks tebal */
+  font-size: 1.2rem; /* Ukuran menonjol */
+  letter-spacing: -0.02em; /* Spasi huruf rapat elegan */
+  margin-top: 0; /* Tanpa margin atas berlebih */
+  margin-bottom: 12px; /* Jarak ke paragraf di bawahnya */
 }
+
 .nilai-inti {
-  padding-left: 20px;
-  color: var(--redup);
+  padding-left: 20px; /* Indentasi daftar poin nilai inti */
+  color: var(--redup); /* Warna teks daftar abu-abu lembut */
+  margin: 20px 0; /* Jarak atas dan bawah daftar */
 }
+
 .nilai-inti li {
-  margin-bottom: 12px;
+  margin-bottom: 10px; /* Jarak antarpoin list */
 }
+
 .nilai-inti strong {
-  color: var(--teks);
+  color: var(--teks); /* Sub-judul poin berwarna kontras penuh */
 }
+
+.transparansi-box {
+  margin-top: 28px; /* Jarak dari list nilai inti ke kotak grafik harga */
+  padding: 24px; /* Ruang dalam kotak kaca transparansi harga */
+  border-radius: var(--radius-md); /* Sudut membulat medium (20px) */
+}
+
+.bar-group {
+  margin-top: 16px; /* Jarak antar baris grafik perbandingan harga */
+}
+
+.bar-label {
+  display: flex; /* Menyusun nama kategori dan nominal harga di ujung kiri-kanan */
+  justify-content: space-between; /* Nama di kiri, harga di kanan */
+  font-size: 0.85rem; /* Ukuran teks label grafik */
+  margin-bottom: 8px; /* Jarak label ke batang grafik */
+  gap: 8px; /* Jarak aman jika layar sempit */
+}
+
+.bar-track {
+  height: 10px; /* Ketebalan jalur grafik batang */
+  background: color-mix(in srgb, var(--teks) 8%, transparent); /* Latar jalur grafik transparan lembut */
+  border-radius: var(--radius-pill); /* Ujung jalur grafik membulat penuh */
+  overflow: hidden; /* Memastikan isi bar tidak keluar dari sudut bulat */
+}
+
+.bar-fill {
+  height: 100%; /* Tinggi isi grafik memenuhi jalur */
+  border-radius: var(--radius-pill); /* Ujung bar isi membulat penuh */
+}
+
+.bar-retail {
+  background: var(--redup); /* Warna abu-abu redup untuk harga parfum ritel mahal */
+  opacity: 0.4; /* Transparansi rendah agar tidak mencolok */
+}
+
+.bar-mbantulanz {
+  background: linear-gradient(90deg, var(--utama), var(--utama-terang)); /* Gradasi emas berkilau untuk harga Mbantulanz */
+  box-shadow: 0 0 12px color-mix(in srgb, var(--utama) 50%, transparent); /* Efek pendar cahaya pada bar Mbantulanz */
+}
+
 .profil-badges {
-  display: grid;
-  gap: 12px;
+  display: grid; /* Menyusun kartu profil pendiri secara bertumpuk vertikal */
+  gap: 14px; /* Jarak antarkartu tim */
 }
+
 .badge {
-  background: var(--kartu);
-  border: 1px solid var(--garis);
-  padding: 18px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  padding: 22px 24px; /* Ruang dalam kartu jabatan */
+  border-radius: var(--radius-md); /* Sudut membulat 20px */
 }
+
 .badge:hover {
-  transform: translateX(6px);
-  border-color: var(--utama);
+  transform: translateY(-4px) scale(1.01); /* Efek melayang halus khas kartu Apple */
+  border-color: color-mix(in srgb, var(--utama) 50%, var(--garis)); /* Bingkai menyala emas lembut */
+  box-shadow: var(--shadow-md); /* Bayangan mengambang lebih dalam */
 }
+
 .badge span,
 .badge small {
-  display: block;
+  display: block; /* Menyusun jabatan dan nama secara atas-bawah */
 }
+
 .badge span {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 600;
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font tegas untuk jabatan */
+  font-weight: 700; /* Jabatan dibuat tebal */
+  font-size: 0.78rem; /* Ukuran label jabatan */
+  text-transform: uppercase; /* Huruf besar semua */
+  letter-spacing: 0.08em; /* Spasi huruf renggang elegan */
+  color: var(--utama); /* Warna emas titanium untuk jabatan */
 }
+
 .badge small {
-  color: var(--redup);
-  margin-top: 4px;
+  color: var(--teks); /* Nama tokoh menggunakan warna utama agar menonjol */
+  font-size: 1.15rem; /* Ukuran nama lebih besar */
+  font-weight: 600; /* Ketebalan nama semi-bold */
+  margin-top: 4px; /* Jarak dari label jabatan */
 }
 
+/* ==========================================================================
+   TIMELINE WARISAN & CERITA KAMI
+   ========================================================================== */
 .timeline {
-  position: relative;
-  max-width: 760px;
-  margin: 0 auto;
-}
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 16px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--garis);
-}
-.timeline-item {
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 18px;
-  margin-bottom: 32px;
-}
-.timeline-marker {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--utama);
-  border: 6px solid var(--latar);
-  box-shadow: 0 0 0 2px var(--utama);
-  z-index: 1;
-}
-.timeline-content {
-  background: var(--kartu);
-  border: 1px solid var(--garis);
-  padding: 20px;
-  border-radius: var(--radius-md);
-  transition: var(--transition);
-}
-.timeline-content:hover {
-  transform: translateX(6px);
-  border-color: var(--utama);
-  box-shadow: var(--shadow-md);
-}
-.timeline-content h3 {
-  margin: 0 0 8px;
-  font-size: 1.15rem;
-}
-.timeline-content p {
-  color: var(--redup);
-  margin: 0 0 14px;
-}
-.achievement-details {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.achievement-details span {
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  color: var(--bronze);
-  background: color-mix(in srgb, var(--utama) 12%, transparent);
+  position: relative; /* Kontainer acuan untuk garis vertikal timeline */
+  max-width: 780px; /* Lebar ideal agar alur cerita fokus di tengah */
+  margin: 0 auto; /* Posisi rata tengah */
 }
 
+.timeline::before {
+  content: ""; /* Garis penghubung vertikal antar tahun */
+  position: absolute; /* Posisi absolut di sisi kiri kartu */
+  left: 17px; /* Tepat di tengah bulatan marker (36px / 2 - 1px) */
+  top: 8px; /* Mulai dari bulatan pertama */
+  bottom: 8px; /* Berhenti di bulatan terakhir */
+  width: 2px; /* Ketebalan garis timeline */
+  background: linear-gradient(180deg, var(--utama), var(--garis)); /* Gradasi garis dari emas ke transparan */
+}
+
+.timeline-item {
+  display: grid; /* Menyusun titik penanda dan kartu cerita secara berdampingan */
+  grid-template-columns: 36px 1fr; /* Kolom 1 untuk titik, kolom 2 untuk kartu kaca */
+  gap: 24px; /* Jarak antara titik dan kartu */
+  margin-bottom: 28px; /* Jarak vertikal antartahun */
+}
+
+.timeline-marker {
+  width: 36px; /* Diameter titik penanda tahun */
+  height: 36px; /* Tinggi titik penanda tahun */
+  border-radius: 50%; /* Bentuk bulat penuh */
+  background: var(--kartu-solid); /* Warna tengah bulatan mengikuti latar kartu */
+  border: 8px solid var(--utama); /* Cincin tebal berwarna emas titanium */
+  box-shadow: 0 0 0 4px var(--latar), 0 4px 12px rgba(0, 0, 0, 0.15); /* Cincin pemisah luar & bayangan lembut */
+  z-index: 1; /* Berada di atas garis vertikal */
+  margin-top: 6px; /* Sejajar dengan judul di dalam kartu */
+}
+
+.timeline-content {
+  padding: 26px 28px; /* Ruang dalam kartu cerita tahunan */
+  border-radius: var(--radius-md); /* Sudut membulat 20px */
+}
+
+.timeline-content:hover {
+  transform: translateY(-4px); /* Kartu terangkat halus saat disentuh kursor */
+  border-color: color-mix(in srgb, var(--utama) 45%, var(--garis)); /* Tepi kaca menyala emas */
+  box-shadow: var(--shadow-md); /* Bayangan kartu mengambang */
+}
+
+.timeline-content h3 {
+  margin: 0 0 8px; /* Jarak bawah judul tahun ke deskripsi */
+  font-size: 1.2rem; /* Ukuran judul milestone */
+}
+
+.timeline-content p {
+  color: var(--redup); /* Deskripsi sejarah berwarna abu-abu lembut */
+  margin: 0 0 16px; /* Jarak bawah ke deretan badge pencapaian */
+}
+
+.achievement-details {
+  display: flex; /* Menyusun tag pencapaian berderet ke samping */
+  gap: 8px; /* Jarak antartag */
+  flex-wrap: wrap; /* Turun baris otomatis jika tidak muat */
+}
+
+.achievement-details span {
+  font-size: 0.78rem; /* Ukuran teks tag pencapaian */
+  padding: 5px 12px; /* Ruang dalam kapsul pencapaian */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh ala tag iOS */
+  color: var(--utama); /* Teks berwarna emas titanium */
+  font-weight: 600; /* Ketebalan teks semi-bold */
+  background: color-mix(in srgb, var(--utama) 12%, transparent); /* Latar emas transparan lembut */
+  border: 1px solid color-mix(in srgb, var(--utama) 24%, transparent); /* Garis tepi kapsul tipis */
+}
+
+/* ==========================================================================
+   PORTFOLIO KOLEKSI (macOS Segmented Control Tabs & Product Cards)
+   ========================================================================== */
 .portfolio-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
+  display: flex; /* Menyusun tombol kategori berdampingan */
+  justify-content: center; /* Posisi grup tab di tengah */
+  gap: 6px; /* Jarak antartombol di dalam kapsul tab */
+  margin: 0 auto 36px; /* Rata tengah dengan jarak bawah ke kartu produk */
+  padding: 6px; /* Ruang dalam wadah kapsul (gaya Segmented Control Apple) */
+  width: fit-content; /* Lebar wadah mengikuti total lebar tombol di dalamnya */
+  max-width: 100%; /* Mencegah meluber di layar kecil */
+  background: var(--kartu); /* Latar wadah tab berupa kaca buram */
+  backdrop-filter: var(--blur-kaca); /* Efek blur kaca */
+  -webkit-backdrop-filter: var(--blur-kaca); /* Dukungan Safari */
+  border: 1px solid var(--garis); /* Garis tepi wadah tab */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh pada wadah luar */
+  box-shadow: var(--shadow-sm); /* Bayangan halus */
+  flex-wrap: wrap; /* Aman untuk layar ponsel sempit */
 }
+
 .tab-button {
-  background: transparent;
-  color: var(--teks);
-  border: 1px solid var(--garis);
-  padding: 8px 14px;
-  border-radius: 20px;
-  font: inherit;
-  font-size: 14px;
-  cursor: pointer;
-  transition: var(--transition);
+  background: transparent; /* Latar tombol transparan saat tidak aktif */
+  color: var(--redup); /* Teks abu-abu saat belum dipilih */
+  border: 0; /* Tanpa garis tepi kasar */
+  padding: 9px 20px; /* Ruang dalam tombol tab */
+  border-radius: var(--radius-pill); /* Sudut kapsul penuh */
+  font: inherit; /* Mengikuti font utama halaman */
+  font-size: 0.88rem; /* Ukuran teks tab yang proporsional */
+  font-weight: 600; /* Ketebalan teks semi-bold */
+  cursor: pointer; /* Kursor tangan saat diarahkan */
+  transition: var(--transition); /* Transisi perpindahan status aktif yang mulus */
 }
-.tab-button:hover,
+
+.tab-button:hover {
+  color: var(--teks); /* Teks menjadi lebih gelap/terang saat di-hover */
+  transform: none; /* Mencegah tombol tab melompat keluar dari wadah segmented control */
+}
+
 .tab-button.active {
-  color: #fff;
-  background: var(--utama);
-  border-color: var(--utama);
+  color: #ffffff; /* Teks putih bersih pada tab yang sedang aktif */
+  background: var(--utama); /* Latar emas titanium pada tab aktif */
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--utama) 35%, transparent); /* Bayangan lembut di bawah tab aktif */
 }
+
+[data-theme="dark"] .tab-button.active {
+  color: #000000; /* Teks hitam pekat di atas tab emas pada mode gelap */
+}
+
 .panel {
-  display: none;
+  display: none; /* Sembunyikan panel koleksi yang tidak aktif */
 }
+
 .panel.active {
-  display: block;
-  animation: fadeUp 0.4s ease;
+  display: block; /* Tampilkan panel koleksi yang dipilih */
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); /* Animasi muncul dari bawah dengan kurva pegas Apple */
 }
+
 .portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  display: grid; /* Layout grid responsif untuk kartu koleksi parfum */
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); /* Otomatis menyesuaikan jumlah kolom */
+  gap: 22px; /* Jarak antarkartu koleksi */
 }
+
 .portfolio-card {
+  padding: 30px 28px; /* Ruang dalam kartu produk yang lega */
+  position: relative; /* Untuk pengaturan lapisan dekorasi */
+  overflow: hidden; /* Menjaga pendaran cahaya tetap di dalam sudut bulat kartu */
+}
+
+.portfolio-card:hover {
+  transform: translateY(-6px); /* Kartu produk melayang naik saat di-hover */
+  border-color: color-mix(in srgb, var(--utama) 50%, var(--garis)); /* Bingkai kartu menyala emas */
+  box-shadow: var(--shadow-lg); /* Bayangan dalam saat kartu diangkat */
+}
+
+.portfolio-card h4 {
+  font-size: 1.35rem; /* Ukuran nama parfum */
+  margin: 8px 0 10px; /* Jarak atas dan bawah judul produk */
+}
+
+.portfolio-card p {
+  color: var(--redup); /* Deskripsi singkat parfum berwarna abu-abu lembut */
+  margin: 0 0 18px; /* Jarak bawah ke daftar keunggulan produk */
+  font-size: 0.95rem; /* Ukuran teks deskripsi */
+}
+
+.highlights {
+  margin: 0; /* Menghapus margin bawaan list */
+  padding-left: 18px; /* Indentasi bullet point */
+  color: var(--teks); /* Poin spesifikasi produk menggunakan warna teks tajam */
+  font-size: 0.88rem; /* Ukuran teks spesifikasi */
+}
+
+.highlights li {
+  margin: 6px 0; /* Jarak antarpoin spesifikasi */
+}
+
+/* ==========================================================================
+   SCENT FINDER & OLFACTORY PYRAMID (Interactive Glass Console)
+   ========================================================================== */
+.scent-finder-grid {
+  display: grid; /* Layout 2 panel (kontrol kuis di kiri, hasil piramida di kanan) */
+  grid-template-columns: 1fr 1.15fr; /* Panel hasil sedikit lebih lebar */
+  gap: 24px; /* Jarak antar panel kaca */
+  align-items: stretch; /* Tinggi kedua kartu sejajar sama rata */
+}
+
+.kartu {
+  padding: 30px; /* Ruang dalam standar untuk semua elemen berkelas .kartu */
+}
+
+.kartu:hover {
+  transform: translateY(-4px); /* Efek angkat halus saat kartu disentuh kursor */
+  border-color: color-mix(in srgb, var(--utama) 45%, var(--garis)); /* Garis tepi keemasan */
+  box-shadow: var(--shadow-md); /* Bayangan medium */
+}
+
+.kartu h3 {
+  margin: 6px 0 10px; /* Jarak judul di dalam kartu */
+  font-size: 1.2rem; /* Ukuran judul kartu */
+}
+
+.kartu p {
+  margin: 0; /* Reset margin paragraf kartu */
+  color: var(--redup); /* Warna deskripsi abu-abu lembut */
+}
+
+.finder-step {
+  margin-top: 26px; /* Jarak antar langkah pertanyaan di Scent Finder */
+}
+
+.chip-group {
+  display: flex; /* Menyusun tombol pilihan (chip) berderet */
+  flex-wrap: wrap; /* Turun baris jika ruang tidak cukup */
+  gap: 10px; /* Jarak antartombol chip */
+  margin-top: 10px; /* Jarak dari label langkah ke grup tombol */
+}
+
+.chip {
+  background: color-mix(in srgb, var(--teks) 4%, transparent); /* Latar kaca tipis pada tombol pilihan */
+  color: var(--teks); /* Warna teks tombol */
+  border: 1px solid var(--garis); /* Garis tepi halus */
+  padding: 10px 18px; /* Ruang dalam kapsul pilihan */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh khas iOS filter chip */
+  font-size: 0.88rem; /* Ukuran teks pilihan */
+  font-weight: 500; /* Ketebalan medium */
+}
+
+.chip:hover,
+.chip.active {
+  background: var(--utama); /* Berubah menjadi emas titanium saat dipilih */
+  color: #ffffff; /* Teks putih bersih */
+  border-color: var(--utama); /* Garis tepi menyatu dengan warna emas */
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--utama) 30%, transparent); /* Efek pendar cahaya lembut */
+}
+
+[data-theme="dark"] .chip:hover,
+[data-theme="dark"] .chip.active {
+  color: #000000; /* Teks hitam tajam saat aktif di mode gelap */
+}
+
+.finder-output {
+  display: flex; /* Menggunakan flexbox vertikal untuk menyusun isi panel hasil */
+  flex-direction: column; /* Susunan dari atas ke bawah */
+  justify-content: space-between; /* Meratakan bagian header, piramida, dan harga di bawah */
+  border-color: color-mix(in srgb, var(--utama) 38%, var(--garis)); /* Bingkai kaca panel hasil sedikit lebih berkilau */
+  background: linear-gradient(
+    155deg,
+    var(--kartu) 0%,
+    color-mix(in srgb, var(--utama) 10%, var(--kartu)) 100%
+  ); /* Bias cahaya sampanye lembut pada kaca panel hasil */
+}
+
+.finder-header {
+  display: flex; /* Menyusun judul rekomendasi di kiri dan badge ketahanan di kanan */
+  justify-content: space-between; /* Posisi rata kiri-kanan */
+  align-items: flex-start; /* Sejajar di bagian atas */
+  gap: 12px; /* Jarak pemisah */
+}
+
+.finder-header h3 {
+  margin: 4px 0 10px; /* Jarak judul parfum yang direkomendasikan */
+  font-size: 1.65rem; /* Ukuran besar agar hasil langsung mencuri perhatian */
+}
+
+.longevity-badge {
+  font-size: 0.78rem; /* Ukuran teks badge durasi ketahanan */
+  font-weight: 700; /* Teks tebal */
+  padding: 6px 14px; /* Ruang dalam kapsul durasi */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh */
+  background: color-mix(in srgb, var(--utama) 15%, transparent); /* Latar emas transparan */
+  border: 1px solid color-mix(in srgb, var(--utama) 30%, transparent); /* Garis tepi emas tipis */
+  color: var(--utama); /* Warna teks emas titanium */
+  white-space: nowrap; /* Mencegah teks waktu terpotong menjadi dua baris */
+}
+
+.pyramid-container {
+  display: grid; /* Menyusun 3 tingkatan aroma (Top, Heart, Base Notes) */
+  gap: 10px; /* Jarak antar lapisan piramida */
+  margin: 22px 0; /* Jarak atas dan bawah piramida aroma */
+}
+
+.pyramid-tier {
+  padding: 12px 16px; /* Ruang dalam tiap baris lapisan aroma */
+  border-radius: var(--radius-sm); /* Sudut membulat 12px */
+  background: color-mix(in srgb, var(--kartu-solid) 65%, transparent); /* Kaca lapis kedua yang lebih bersih */
+  border: 1px solid var(--garis); /* Bingkai halus di sekeliling tier */
+  border-left: 4px solid var(--utama); /* Aksen garis emas tebal di sisi kiri */
+  transition: var(--transition); /* Transisi halus saat di-hover */
+}
+
+.pyramid-tier:hover {
+  transform: translateX(4px); /* Bergeser sedikit ke kanan saat disentuh kursor */
+}
+
+.tier-top {
+  margin-right: 16%; /* Baris paling atas dibuat paling pendek menyerupai puncak piramida */
+}
+
+.tier-heart {
+  margin-right: 8%; /* Baris tengah berukuran sedang */
+}
+
+.tier-base {
+  margin-right: 0; /* Baris dasar memenuhi lebar penuh */
+}
+
+.tier-label {
+  display: block; /* Label lapisan berada di baris tersendiri di atas komposisi */
+  font-size: 0.7rem; /* Ukuran teks label kecil & rapi */
+  text-transform: uppercase; /* Huruf kapital semua */
+  letter-spacing: 0.08em; /* Spasi huruf renggang */
+  color: var(--redup); /* Warna abu-abu sekunder */
+  margin-bottom: 2px; /* Jarak tipis ke teks bahan aroma */
+}
+
+.pyramid-tier strong {
+  font-size: 0.9rem; /* Ukuran teks bahan-bahan aroma (notes) */
+  color: var(--teks); /* Warna kontras utama */
+  font-weight: 600; /* Ketebalan semi-bold */
+}
+
+.finder-footer {
+  display: flex; /* Menyusun harga di kiri dan tombol pilih di kanan */
+  justify-content: space-between; /* Posisi berjauhan di ujung kiri & kanan */
+  align-items: center; /* Sejajar vertikal di tengah */
+  padding-top: 16px; /* Ruang di atas footer kartu */
+  border-top: 1px solid var(--garis); /* Garis pemisah tipis di bagian bawah kartu */
+}
+
+.rek-harga {
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font tegas untuk nominal harga */
+  font-weight: 800; /* Ketebalan ekstra */
+  font-size: 1.3rem; /* Ukuran nominal harga menonjol */
+  color: var(--teks); /* Warna kontras tajam ala label harga Apple Store */
+}
+
+.rek-harga small {
+  font-weight: 500; /* Ukuran botol (/ 50ml) lebih tipis */
+  font-size: 0.82rem; /* Ukuran teks lebih kecil */
+  color: var(--redup); /* Warna abu-abu sekunder */
+}
+
+/* ==========================================================================
+   ATELIER GRAFIR PERSONAL (Apple Studio Showcase & 3D Glass Bottle)
+   ========================================================================== */
+.atelier-grid {
+  display: grid; /* Layout 2 kolom untuk panggung botol & panel kustomisasi */
+  grid-template-columns: 1fr 1.15fr; /* Proporsi lebar panggung dan kontrol */
+  gap: 24px; /* Jarak antar kartu */
+  align-items: stretch; /* Tinggi kartu panggung dan kontrol sejajar */
+}
+
+.bottle-stage {
+  position: relative; /* Acuan posisi untuk aura cahaya di belakang botol */
+  min-height: 380px; /* Tinggi minimal panggung visual botol */
+  display: grid; /* Menggunakan grid untuk menengahkan ilustrasi botol */
+  place-items: center; /* Botol tepat di tengah panggung */
+  overflow: hidden; /* Menjaga pendaran aura tidak bocor keluar kartu */
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--utama) 20%, var(--kartu)),
+    var(--kartu) 72%
+  ); /* Cahaya sorot bundar di belakang botol parfum */
+}
+
+.bottle-aura {
+  position: absolute; /* Lapisan cahaya di belakang botol (elemen asli index.html) */
+  width: 240px; /* Diameter pendaran cahaya studio */
+  height: 240px; /* Tinggi pendaran cahaya studio */
+  border-radius: 50%; /* Bentuk lingkaran */
+  background: radial-gradient(circle, color-mix(in srgb, var(--utama) 38%, transparent), transparent 70%); /* Cahaya emas lembut */
+  filter: blur(24px); /* Efek blur lembut seperti lampu studio produk */
+  pointer-events: none; /* Tidak menghalangi interaksi klik */
+}
+
+.bottle-illustration {
+  display: flex; /* Menyusun tutup, leher, dan badan botol secara vertikal */
+  flex-direction: column; /* Urutan dari atas ke bawah */
+  align-items: center; /* Sumbu tengah lurus sempurna */
+  z-index: 1; /* Berada di depan .bottle-aura */
+  transition: var(--transition); /* Transisi halus saat warna kemasan diubah */
+}
+
+.bottle-stage:hover .bottle-illustration {
+  transform: translateY(-6px) scale(1.02); /* Botol sedikit melayang saat panggung disentuh kursor */
+}
+
+.bottle-cap {
+  width: 56px; /* Lebar tutup botol parfum */
+  height: 38px; /* Tinggi tutup botol parfum */
+  border-radius: 8px 8px 3px 3px; /* Sudut atas membulat halus */
+  background: linear-gradient(135deg, #f3dfb1 0%, #b88e4c 55%, #7d5f32 100%); /* Gradasi logam emas titanium reflektif */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.7); /* Bayangan luar dan kilau logam di tepi atas */
+}
+
+.bottle-neck {
+  width: 34px; /* Lebar leher penyemprot (collar) */
+  height: 15px; /* Tinggi leher botol */
+  background: linear-gradient(90deg, #7d5f32, #e5c158, #7d5f32); /* Efek silinder logam mengilap */
+}
+
+.bottle-body {
+  width: 176px; /* Lebar badan botol kaca */
+  height: 218px; /* Tinggi badan botol kaca */
+  border-radius: 22px 22px 16px 16px; /* Bahu botol membulat elegan khas flakon mewah */
   background: linear-gradient(
     145deg,
-    var(--kartu),
-    color-mix(in srgb, var(--kartu) 88%, var(--utama))
-  );
-  border: 1px solid var(--garis);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  transition: var(--transition);
-}
-.portfolio-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--utama);
-  box-shadow: var(--shadow-lg);
-}
-.portfolio-card h4 {
-  font-size: 1.2rem;
-  margin: 0 0 8px;
-}
-.portfolio-card p {
-  color: var(--redup);
-  margin: 0 0 14px;
-}
-.highlights {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--redup);
-  font-size: 14px;
-}
-.highlights li {
-  margin: 4px 0;
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(197, 160, 89, 0.16) 50%,
+    rgba(255, 255, 255, 0.12) 100%
+  ); /* Efek kaca kristal bening dengan bias cairan parfum emas */
+  border: 1.5px solid rgba(255, 255, 255, 0.65); /* Pantulan cahaya di dinding luar kaca botol */
+  box-shadow:
+    inset 0 0 28px rgba(197, 160, 89, 0.28),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.6),
+    0 24px 44px rgba(0, 0, 0, 0.22); /* Kedalaman dimensi kaca 3D & bayangan jatuh */
+  display: grid; /* Menengahkan plakat logam di dada botol */
+  place-items: center; /* Plakat tepat di titik tengah botol */
+  padding: 18px; /* Jarak tepi botol ke plakat */
+  backdrop-filter: blur(10px); /* Efek pembiasan kaca di badan botol */
+  -webkit-backdrop-filter: blur(10px); /* Dukungan Safari */
+  transition: var(--transition); /* Transisi mulus saat ganti warna finish */
 }
 
+.bottle-plaque {
+  width: 100%; /* Lebar plakat menyesuaikan ruang dalam botol */
+  padding: 16px 10px; /* Ruang dalam plakat logam */
+  text-align: center; /* Teks ukiran rata tengah */
+  border-radius: 12px; /* Sudut plakat logam membulat lembut */
+  background: linear-gradient(135deg, #fbf4e4 0%, #dfc184 55%, #c29b53 100%); /* Permukaan plakat emas sampanye */
+  color: #1d1d1f; /* Warna teks ukiran gelap tajam */
+  border: 1px solid rgba(255, 255, 255, 0.75); /* Kilau tepi plakat logam */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Bayangan plakat di atas kaca botol */
+  display: grid; /* Menyusun baris teks di dalam plakat */
+  gap: 5px; /* Jarak antarbaris teks plakat */
+  transition: var(--transition); /* Animasi halus saat berganti warna plakat */
+}
+
+.plaque-brand {
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font identitas brand */
+  font-size: 9.5px; /* Ukuran mikro yang presisi */
+  font-weight: 800; /* Ketebalan ekstra */
+  letter-spacing: 0.2em; /* Spasi huruf sangat renggang khas plakat parfum Prancis */
+}
+
+.plaque-variant {
+  font-size: 11px; /* Ukuran nama varian parfum */
+  font-style: italic; /* Cetak miring elegan */
+  opacity: 0.82; /* Kepekatan sedikit diredupkan agar nama ukiran lebih menonjol */
+}
+
+.plaque-engraving {
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font khusus untuk ukiran nama kustom */
+  font-size: 14.5px; /* Ukuran teks ukiran nama */
+  font-weight: 800; /* Ketebalan tegas seperti hasil laser engraving */
+  letter-spacing: 0.14em; /* Jarak antarhuruf ukiran */
+  padding: 5px 0; /* Ruang atas-bawah di antara garis pembatas plakat */
+  border-top: 1px solid rgba(29, 29, 31, 0.18); /* Garis ukir tipis di atas nama */
+  border-bottom: 1px solid rgba(29, 29, 31, 0.18); /* Garis ukir tipis di bawah nama */
+  text-transform: uppercase; /* Otomatis huruf kapital semua */
+  min-height: 28px; /* Menjaga tinggi plakat tetap stabil meski teks dihapus */
+}
+
+.plaque-origin {
+  font-size: 7.5px; /* Teks keterangan konsentrasi & asal di bagian bawah plakat */
+  letter-spacing: 0.12em; /* Spasi huruf renggang */
+  font-weight: 600; /* Ketebalan semi-bold agar tetap terbaca */
+  opacity: 0.75; /* Warna sedikit lembut */
+}
+
+/* VARIASI WARNA KEMASAN BOTOL (Bronze & Obsidian Onyx) */
+.bottle-stage[data-finish="bronze"] .bottle-cap {
+  background: linear-gradient(135deg, #d5b895, #8c6747, #523a24); /* Tutup logam perunggu hangat */
+}
+
+.bottle-stage[data-finish="bronze"] .bottle-body {
+  background: linear-gradient(145deg, rgba(168, 137, 103, 0.38), rgba(74, 55, 35, 0.42)); /* Kaca amber perunggu */
+  border-color: rgba(213, 184, 149, 0.55); /* Kilau tepi kaca perunggu */
+}
+
+.bottle-stage[data-finish="bronze"] .bottle-plaque {
+  background: linear-gradient(135deg, #f3e5d5, #c8a987, #9c7a56); /* Plakat logam perunggu satin */
+}
+
+.bottle-stage[data-finish="onyx"] .bottle-cap {
+  background: linear-gradient(135deg, #48484a, #1c1c1e, #000000); /* Tutup Space Black Titanium */
+}
+
+.bottle-stage[data-finish="onyx"] .bottle-body {
+  background: linear-gradient(145deg, rgba(44, 44, 46, 0.88), rgba(10, 10, 12, 0.94)); /* Kaca hitam smoky obsidian */
+  border-color: rgba(222, 192, 124, 0.55); /* Tepi kaca beraksen emas */
+}
+
+.bottle-stage[data-finish="onyx"] .bottle-plaque {
+  background: linear-gradient(135deg, #2c2c2e, #141416); /* Plakat hitam titanium */
+  color: #dec07c; /* Teks ukiran emas berkilau */
+  border-color: rgba(222, 192, 124, 0.6); /* Bingkai plakat emas tipis */
+}
+
+.bottle-stage[data-finish="onyx"] .plaque-engraving {
+  border-color: rgba(222, 192, 124, 0.3); /* Garis pembatas ukiran berwarna emas */
+}
+
+/* KONTROL STUDIO GRAFIR */
+.atelier-controls {
+  display: flex; /* Menyusun elemen form kontrol secara vertikal */
+  flex-direction: column; /* Arah susunan dari atas ke bawah */
+  justify-content: center; /* Rata tengah secara vertikal di dalam kartu */
+  gap: 20px; /* Jarak antarelemen kontrol */
+}
+
+.control-field {
+  display: grid; /* Menyusun label dan input secara bertumpuk */
+  gap: 8px; /* Jarak antara label dan kolom input */
+}
+
+.control-field label {
+  font-weight: 600; /* Label input dibuat semi-bold */
+  font-size: 0.88rem; /* Ukuran teks label */
+  color: var(--teks); /* Warna teks tajam */
+}
+
+.control-field input {
+  padding: 13px 16px; /* Ruang dalam kolom input teks grafir */
+  border: 1px solid var(--garis); /* Garis tepi halus */
+  border-radius: var(--radius-sm); /* Sudut membulat 12px ala input macOS */
+  background: color-mix(in srgb, var(--kartu-solid) 75%, transparent); /* Latar input semi-transparan bersih */
+  color: var(--teks); /* Warna teks ketikan pengguna */
+  font: inherit; /* Mengikuti font utama */
+  font-weight: 600; /* Ketikan nama terlihat tegas */
+  letter-spacing: 0.04em; /* Sedikit spasi huruf agar menyerupai preview ukiran */
+  transition: var(--transition); /* Transisi halus saat input diklik (fokus) */
+}
+
+.control-field input:focus {
+  outline: none; /* Menghapus outline kasar bawaan browser */
+  border-color: var(--utama); /* Garis tepi berubah menjadi emas saat aktif */
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--utama) 20%, transparent); /* Cincin pendar fokus khas Apple (Focus Ring) */
+}
+
+.finish-options {
+  display: flex; /* Menyusun 3 tombol pilihan warna botol secara sejajar */
+  flex-wrap: wrap; /* Aman di layar kecil */
+  gap: 10px; /* Jarak antartombol warna */
+}
+
+.finish-btn {
+  background: color-mix(in srgb, var(--teks) 4%, transparent); /* Latar kaca tipis pada tombol warna */
+  color: var(--teks); /* Warna teks tombol */
+  border: 1px solid var(--garis); /* Bingkai tipis */
+  padding: 10px 16px; /* Ruang dalam kapsul pilihan warna */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh */
+  font-size: 0.85rem; /* Ukuran teks tombol */
+  font-weight: 500; /* Ketebalan medium */
+}
+
+.finish-btn.active,
+.finish-btn:hover {
+  background: var(--utama); /* Latar emas titanium saat aktif/di-hover */
+  color: #ffffff; /* Teks putih bersih */
+  border-color: var(--utama); /* Garis tepi emas */
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--utama) 30%, transparent); /* Pendaran bayangan emas */
+}
+
+[data-theme="dark"] .finish-btn.active,
+[data-theme="dark"] .finish-btn:hover {
+  color: #000000; /* Teks hitam tajam di mode gelap */
+}
+
+/* ==========================================================================
+   GRID KEUNGGULAN (Bento Glass Feature Cards)
+   ========================================================================== */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  display: grid; /* Layout Bento Grid responsif untuk 4 kartu keunggulan */
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); /* Lebar kolom otomatis menyesuaikan layar */
+  gap: 20px; /* Jarak antarkartu fitur */
 }
-.kartu {
-  background: var(--kartu);
-  border: 1px solid var(--garis);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+
+.fitur-ikon {
+  width: 46px; /* Lebar kotak ikon fitur */
+  height: 46px; /* Tinggi kotak ikon fitur */
+  display: grid; /* Menengahkan simbol ikon */
+  place-items: center; /* Simbol tepat di tengah kotak */
+  font-size: 20px; /* Ukuran simbol ikon */
+  color: var(--utama); /* Simbol berwarna emas titanium */
+  background: color-mix(in srgb, var(--utama) 14%, transparent); /* Latar kaca emas transparan ala ikon iOS */
+  border: 1px solid color-mix(in srgb, var(--utama) 30%, transparent); /* Bingkai kaca tipis pada kotak ikon */
+  border-radius: 14px; /* Sudut squircle khas ikon aplikasi Apple */
+  margin-bottom: 16px; /* Jarak bawah ikon ke label kategori */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4); /* Kilau kaca di bagian atas kotak ikon */
 }
-.kartu:hover {
-  transform: translateY(-5px);
-  border-color: var(--utama);
-  box-shadow: var(--shadow-md);
+
+.fitur-kategori {
+  display: inline-block; /* Agar margin bekerja rapi */
+  font-size: 0.72rem; /* Ukuran label kategori mikro yang elegan */
+  text-transform: uppercase; /* Huruf kapital semua */
+  letter-spacing: 0.1em; /* Spasi huruf renggang */
+  color: var(--utama); /* Warna emas titanium */
+  font-weight: 700; /* Ketebalan tegas */
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font geometris */
 }
-.kartu h3 {
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-.kartu p {
-  margin: 0;
-  color: var(--redup);
+
+/* ==========================================================================
+   FAQ (macOS Settings Accordion Glass)
+   ========================================================================== */
+#faq details summary::-webkit-details-marker {
+  display: none; /* Menyembunyikan panah segitiga bawaan browser Safari/Chrome */
 }
 
 #faq details {
-  background: var(--kartu);
-  border: 1px solid var(--garis);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
-  margin: 0 auto 10px;
-  max-width: 700px;
-  transition: var(--transition);
+  padding: 20px 26px; /* Ruang dalam baris akordeon FAQ */
+  margin: 0 auto 14px; /* Rata tengah dengan jarak antarpertanyaan 14px */
+  max-width: 760px; /* Lebar optimal agar mudah dibaca */
+  border-radius: var(--radius-md); /* Sudut membulat 20px */
 }
+
+#faq details:hover {
+  border-color: color-mix(in srgb, var(--utama) 40%, var(--garis)); /* Bingkai kaca sedikit menyala saat disentuh kursor */
+}
+
 #faq details[open] {
-  border-color: var(--utama);
-  box-shadow: var(--shadow-sm);
+  border-color: color-mix(in srgb, var(--utama) 55%, var(--garis)); /* Bingkai emas saat pertanyaan dibuka */
+  box-shadow: var(--shadow-md); /* Bayangan lebih dalam saat akordeon terbuka */
 }
-summary {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 600;
-  cursor: pointer;
+
+#faq details summary {
+  list-style: none; /* Menghapus bullet bawaan elemen summary */
+  display: flex; /* Menyusun teks pertanyaan di kiri dan ikon +/- di kanan */
+  justify-content: space-between; /* Posisi rata kiri-kanan */
+  align-items: center; /* Sejajar vertikal di tengah */
+  font-family: "Plus Jakarta Sans", sans-serif; /* Font judul untuk pertanyaan */
+  font-weight: 600; /* Ketebalan semi-bold */
+  font-size: 1.02rem; /* Ukuran teks pertanyaan nyaman dibaca */
+  cursor: pointer; /* Kursor tangan saat diarahkan */
+  gap: 16px; /* Jarak aman antara teks pertanyaan dan tombol + */
 }
+
+#faq details summary::after {
+  content: "＋"; /* Simbol tambah saat FAQ masih tertutup */
+  width: 28px; /* Lebar bulatan tombol indikator */
+  height: 28px; /* Tinggi bulatan tombol indikator */
+  display: grid; /* Menengahkan tanda + */
+  place-items: center; /* Tepat di tengah lingkaran */
+  border-radius: 50%; /* Bentuk lingkaran penuh */
+  background: color-mix(in srgb, var(--utama) 14%, transparent); /* Latar bulatan kaca emas tipis */
+  color: var(--utama); /* Simbol + berwarna emas titanium */
+  font-weight: 600; /* Ketebalan simbol */
+  font-size: 0.95rem; /* Ukuran simbol */
+  flex-shrink: 0; /* Mencegah lingkaran gepeng jika teks pertanyaan panjang */
+  transition: var(--transition); /* Animasi perubahan saat dibuka */
+}
+
+#faq details[open] summary::after {
+  content: "－"; /* Berubah menjadi tanda kurang saat FAQ dibuka */
+  background: var(--utama); /* Lingkaran penuh berwarna emas saat terbuka */
+  color: #ffffff; /* Simbol putih di atas bulatan emas */
+}
+
+[data-theme="dark"] #faq details[open] summary::after {
+  color: #000000; /* Simbol hitam di atas bulatan emas pada mode gelap */
+}
+
 #faq details p {
-  color: var(--redup);
-  margin: 12px 0 0;
+  color: var(--redup); /* Teks jawaban berwarna abu-abu lembut */
+  margin: 14px 0 0; /* Jarak atas jawaban dari baris pertanyaan */
+  padding-top: 14px; /* Ruang atas setelah garis pemisah */
+  border-top: 1px solid var(--garis); /* Garis pemisah kaca tipis antara pertanyaan & jawaban */
+  line-height: 1.65; /* Spasi baris jawaban yang nyaman */
+}
+
+/* ==========================================================================
+   FORMULIR PENDAFTARAN & TOMBOL GLOBAL
+   ========================================================================== */
+.registration-layout {
+  display: grid; /* Layout 2 kolom untuk ajakan pendaftaran & kartu formulir */
+  grid-template-columns: 1fr 1.05fr; /* Proporsi seimbang kiri dan kanan */
+  gap: 48px; /* Jarak lega antar kolom */
+  align-items: center; /* Rata tengah secara vertikal */
+  max-width: 980px; /* Lebar maksimal area registrasi */
+  margin: 0 auto; /* Rata tengah di halaman */
+}
+
+.registration-copy {
+  text-align: left; /* Teks ajakan rata kiri */
+}
+
+.registration-copy h2 {
+  text-align: left; /* Judul ajakan rata kiri (override rata tengah default H2) */
+  margin-bottom: 16px; /* Jarak bawah judul ke paragraf */
+}
+
+.registration-copy p {
+  color: var(--redup); /* Warna paragraf penjelas abu-abu lembut */
+  font-size: 1.05rem; /* Ukuran teks sedikit lebih besar agar persuasif */
 }
 
 .form {
-  display: grid;
-  gap: 14px;
-  max-width: 520px;
-  margin: 0 auto;
-}
-.form label {
-  display: grid;
-  gap: 6px;
-  font-weight: 600;
-}
-.form input {
-  padding: 12px 14px;
-  border: 1px solid var(--garis);
-  border-radius: var(--radius-sm);
-  background: var(--latar);
-  color: var(--teks);
-  font: inherit;
-  transition: var(--transition);
-}
-.form input:focus {
-  outline: none;
-  border-color: var(--utama);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--utama) 20%, transparent);
-}
-.pesan {
-  margin: 0;
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-}
-.pesan.berhasil {
-  background: #dcfce7;
-  color: #166534;
-}
-.pesan.gagal {
-  background: #fee2e2;
-  color: #991b1b;
-}
-[data-theme="dark"] .pesan.berhasil {
-  background: rgba(34, 197, 94, 0.16);
-  color: #86efac;
-  border: 1px solid rgba(34, 197, 94, 0.35);
-}
-[data-theme="dark"] .pesan.gagal {
-  background: rgba(239, 68, 68, 0.16);
-  color: #fca5a5;
-  border: 1px solid rgba(239, 68, 68, 0.35);
+  display: grid; /* Menyusun baris input formulir secara vertikal */
+  gap: 18px; /* Jarak antar kolom isian form */
+  max-width: 520px; /* Lebar maksimal kartu form */
+  width: 100%; /* Memenuhi kolom grid */
+  margin: 0 auto; /* Rata tengah */
+  padding: 34px; /* Ruang dalam kartu form kaca yang lega */
 }
 
+.form label {
+  display: grid; /* Menyusun teks label di atas kotak input */
+  gap: 7px; /* Jarak antara teks label dan kotak input */
+  font-weight: 600; /* Ketebalan label semi-bold */
+  font-size: 0.86rem; /* Ukuran label bersih ala form Apple ID */
+  color: var(--teks); /* Warna label kontras */
+}
+
+.form input {
+  padding: 13px 16px; /* Ruang dalam kotak input agar nyaman diklik di HP maupun desktop */
+  border: 1px solid var(--garis); /* Garis tepi tipis */
+  border-radius: var(--radius-sm); /* Sudut membulat 12px */
+  background: color-mix(in srgb, var(--kartu-solid) 75%, transparent); /* Latar input kaca bersih */
+  color: var(--teks); /* Warna teks isian */
+  font: inherit; /* Font mengikuti body */
+  font-size: 0.95rem; /* Ukuran teks input */
+  transition: var(--transition); /* Transisi fokus halus */
+}
+
+.form input::placeholder {
+  color: color-mix(in srgb, var(--redup) 65%, transparent); /* Warna teks placeholder lembut */
+}
+
+.form input:focus {
+  outline: none; /* Hilangkan garis fokus kasar bawaan browser */
+  border-color: var(--utama); /* Garis tepi menyala emas saat diketik */
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--utama) 20%, transparent); /* Cincin fokus lembut ala macOS */
+}
+
+/* PESAN VALIDASI FORM (Berhasil / Gagal) */
+.pesan {
+  margin: 0; /* Tanpa margin luar berlebih */
+  padding: 12px 16px; /* Ruang dalam kotak notifikasi status */
+  border-radius: var(--radius-sm); /* Sudut membulat 12px */
+  font-size: 0.88rem; /* Ukuran teks pesan status */
+  font-weight: 500; /* Ketebalan medium */
+}
+
+.pesan.berhasil {
+  background: rgba(52, 199, 89, 0.14); /* Hijau transparan lembut khas indikator sukses iOS */
+  color: #1d7a35; /* Teks hijau tua tajam untuk mode terang */
+  border: 1px solid rgba(52, 199, 89, 0.35); /* Garis tepi hijau tipis */
+}
+
+.pesan.gagal {
+  background: rgba(255, 59, 48, 0.12); /* Merah transparan lembut khas peringatan iOS */
+  color: #c92a2a; /* Teks merah tajam untuk mode terang */
+  border: 1px solid rgba(255, 59, 48, 0.32); /* Garis tepi merah tipis */
+}
+
+[data-theme="dark"] .pesan.berhasil {
+  background: rgba(52, 199, 89, 0.16); /* Latar hijau kaca di mode gelap */
+  color: #69db7c; /* Teks hijau terang di mode gelap */
+}
+
+[data-theme="dark"] .pesan.gagal {
+  background: rgba(255, 69, 58, 0.16); /* Latar merah kaca di mode gelap */
+  color: #ff8787; /* Teks merah terang di mode gelap */
+}
+
+/* TOMBOL STANDAR (Apple Pill Buttons) */
 .tombol,
 button {
-  display: inline-block;
-  background: var(--utama);
-  color: #fff;
-  border: 0;
-  border-radius: var(--radius-sm);
-  padding: 11px 20px;
-  font: inherit;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: var(--transition);
+  display: inline-block; /* Agar properti padding dan transform bekerja optimal */
+  background: var(--utama); /* Warna dasar tombol emas titanium */
+  color: #ffffff; /* Teks putih bersih */
+  border: 0; /* Tanpa border kasar */
+  border-radius: var(--radius-pill); /* Bentuk kapsul penuh (980px) khas Apple */
+  padding: 12px 24px; /* Ruang dalam tombol yang proporsional */
+  font: inherit; /* Font mengikuti halaman */
+  font-size: 0.92rem; /* Ukuran teks tombol */
+  font-weight: 600; /* Ketebalan teks semi-bold */
+  letter-spacing: -0.01em; /* Spasi huruf rapat rapi */
+  text-decoration: none; /* Menghapus garis bawah jika diterapkan pada tag <a> */
+  text-align: center; /* Teks rata tengah */
+  cursor: pointer; /* Kursor tangan */
+  transition: var(--transition); /* Transisi halus saat di-hover atau ditekan */
 }
+
+[data-theme="dark"] .tombol,
+[data-theme="dark"] button[type="submit"],
+[data-theme="dark"] #btn-simpan-grafir,
+[data-theme="dark"] #btn-pakai-rekomendasi {
+  color: #000000; /* Teks hitam pekat di atas tombol emas saat mode gelap aktif */
+}
+
 .tombol:hover,
 button:hover {
-  opacity: 0.92;
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Tombol sedikit terangkat saat didekati kursor */
+  filter: brightness(1.06); /* Sedikit lebih cerah saat di-hover */
 }
+
+.tombol:active,
+button:active {
+  transform: translateY(0) scale(0.98); /* Efek membal ke dalam saat tombol diklik */
+}
+
 .tombol.kecil {
-  padding: 7px 14px;
+  padding: 8px 18px; /* Ukuran padding lebih ringkas untuk tombol kecil */
+  font-size: 0.84rem; /* Ukuran font tombol kecil */
 }
 
-/* Fitur Card */
-.fitur-ikon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  font-size: 20px;
-  color: #fff;
-  background: linear-gradient(135deg, var(--utama), var(--bronze));
-  border-radius: var(--radius-md);
-  margin-bottom: 12px;
-  box-shadow: var(--shadow-md);
-}
-.fitur-kategori {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--bronze);
-  font-weight: 700;
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
-
-/* Form Section */
-.registration-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-  max-width: 960px;
-  margin: 0 auto;
-}
-.registration-copy {
-  text-align: left;
-}
-.registration-copy h2 {
-  text-align: left;
-  margin-bottom: 16px;
-}
-.registration-copy p {
-  color: var(--redup);
-}
-
-/* Footer */
+/* ==========================================================================
+   FOOTER MINIMALIS ALA APPLE
+   ========================================================================== */
 .bawah {
-  border-top: 1px solid var(--garis);
-  padding: 24px 0;
-  color: var(--redup);
-  font-size: 14px;
-}
-.bawah .wadah {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.bawah span {
-  font-weight: 600;
-}
-.bawah nav {
-  display: flex;
-}
-.bawah a {
-  color: var(--redup);
-  margin-left: 14px;
-  text-decoration: none;
+  border-top: 1px solid var(--garis); /* Garis pembatas atas tipis */
+  padding: 36px 0; /* Ruang atas dan bawah footer */
+  color: var(--redup); /* Warna teks footer abu-abu lembut */
+  font-size: 0.84rem; /* Ukuran teks catatan kaki khas Apple (13.4px) */
+  background: color-mix(in srgb, var(--kartu) 50%, transparent); /* Latar kaca tipis pada footer */
+  backdrop-filter: var(--blur-kaca); /* Efek blur kaca di bagian bawah halaman */
+  -webkit-backdrop-filter: var(--blur-kaca); /* Dukungan Safari */
 }
 
-/* Scroll Reveal: elemen berkelas .animate-on-scroll muncul fade-up via IntersectionObserver */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+.bawah .wadah {
+  display: flex; /* Menyusun hak cipta di kiri dan tautan di kanan */
+  justify-content: space-between; /* Posisi rata kiri-kanan */
+  align-items: center; /* Sejajar vertikal di tengah */
+  gap: 16px; /* Jarak aman antar elemen */
+  flex-wrap: wrap; /* Turun baris rapi di layar kecil */
 }
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+
+.bawah span {
+  font-weight: 500; /* Ketebalan teks copyright */
+}
+
+.bawah nav {
+  display: flex; /* Menyusun tautan footer berderet ke samping */
+  flex-wrap: wrap; /* Aman untuk layar sempit */
+  gap: 20px; /* Jarak antartautan footer */
+}
+
+.bawah a {
+  color: var(--redup); /* Warna tautan abu-abu sekunder */
+  text-decoration: none; /* Tanpa garis bawah */
+  transition: var(--transition); /* Transisi perubahan warna halus */
+}
+
+.bawah a:hover {
+  color: var(--teks); /* Berubah menjadi warna teks utama saat di-hover */
+}
+
+/* ==========================================================================
+   ANIMASI SCROLL REVEAL & RESPONSIF
+   ========================================================================== */
+.js .animate-on-scroll {
+  opacity: 0; /* Sembunyikan elemen sebelum masuk ke area layar (hanya jika JS aktif) */
+  transform: translateY(28px) scale(0.985); /* Posisi awal sedikit di bawah dan sedikit mengecil */
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Kurva animasi masuk yang sangat mulus ala macOS */
+}
+
+.js .animate-on-scroll.is-visible {
+  opacity: 1; /* Muncul penuh saat elemen terlihat di layar */
+  transform: translateY(0) scale(1); /* Kembali ke posisi dan ukuran normal */
 }
 
 @keyframes fadeUp {
   from {
-    opacity: 0;
-    transform: translateY(14px);
+    opacity: 0; /* Kondisi awal transparan */
+    transform: translateY(14px) scale(0.99); /* Sedikit di bawah */
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* Kondisi akhir terlihat penuh */
+    transform: translateY(0) scale(1); /* Posisi normal */
   }
 }
 
-/* Dark mode form */
-[data-theme="dark"] .form input {
-  background: #141310;
-  border-color: #2d2a26;
+/* PENYESUAIAN KHUSUS INPUT DI DARK MODE */
+[data-theme="dark"] .form input,
+[data-theme="dark"] .control-field input {
+  background: rgba(255, 255, 255, 0.05); /* Latar input kaca gelap transparan */
+  border-color: rgba(255, 255, 255, 0.14); /* Garis tepi input kaca gelap */
 }
 
-/* Dark mode hero text */
-[data-theme="dark"] .hero {
-  color: var(--teks);
-}
-[data-theme="dark"] .hero .stat {
-  border-color: rgba(212, 175, 55, 0.35);
-  background: rgba(212, 175, 55, 0.08);
-}
-[data-theme="dark"] .hero .tombol {
-  background: var(--utama);
-  color: #0f0e0d;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-  .profil-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+/* RESPONSIF TABLET & MOBILE */
+@media (max-width: 820px) {
+  .profil-grid,
+  .scent-finder-grid,
+  .atelier-grid,
   .registration-layout {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr; /* Mengubah layout 2 kolom menjadi 1 kolom bertumpuk di tablet/HP */
+    gap: 24px; /* Jarak antarkartu saat bertumpuk */
   }
+
+  .atas .wadah {
+    justify-content: center; /* Menengahkan logo dan navigasi pada layar sempit */
+  }
+
   .atas nav {
-    gap: 10px;
-    font-size: 14px;
+    width: 100%; /* Navigasi mengambil lebar penuh baris kedua */
+    justify-content: center; /* Item menu rata tengah */
+    gap: 4px; /* Jarak antar item menu lebih rapat */
   }
+
+  .atas nav a {
+    font-size: 0.8rem; /* Ukuran teks menu sedikit diperkecil agar muat rapi */
+    padding: 5px 9px; /* Padding kapsul menu diperkecil */
+  }
+
   .hero {
-    padding: 64px 0;
+    padding: 76px 0 64px; /* Padding atas-bawah Hero disesuaikan untuk layar HP */
+  }
+
+  main > section.wadah {
+    margin-bottom: 80px; /* Jarak antar-section lebih ringkas di perangkat mobile */
+  }
+
+  .tier-top,
+  .tier-heart {
+    margin-right: 0; /* Lebar kotak piramida aroma dibuat rata penuh agar tidak sempit di HP */
   }
 }
 
-/* Reduced motion */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.15rem; /* Ukuran judul utama yang pas untuk layar ponsel pintar */
+  }
+
+  .kartu,
+  .form,
+  .portfolio-card {
+    padding: 22px 20px; /* Padding dalam kartu disesuaikan agar ruang baca lebih lega di HP */
+  }
+}
+
+/* AKSESIBILITAS: KURANGI GERAKAN BAGI PENGGUNA SENSITIF ANIMASI */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important; /* Mematikan durasi keyframe animasi */
+    animation-iteration-count: 1 !important; /* Mencegah pengulangan animasi */
+    scroll-behavior: auto !important; /* Mengubah smooth scroll menjadi instan */
+    transition-duration: 0.01ms !important; /* Mematikan transisi gerak */
   }
-  .animate-on-scroll {
-    opacity: 1;
-    transform: none;
-  }
-}
 
-/* Mobile */
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 28px;
+  .js .animate-on-scroll {
+    opacity: 1; /* Langsung tampilkan semua elemen tanpa efek gerak */
+    transform: none; /* Tanpa pergeseran posisi */
   }
 }
