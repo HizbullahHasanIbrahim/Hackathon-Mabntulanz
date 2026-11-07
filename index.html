@@ -1,0 +1,265 @@
+<!doctype html>
+<!-- Tag html utama dengan kelas 'js' (ditandai dinamis oleh skrip untuk styling pro-JS) -->
+<html lang="id" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mbantulanz Parfum — Kemewahan Aroma Nusantara, Terjangkau untuk Setiap Momen</title>
+    <!-- Google Fonts: Plus Jakarta Sans (heading) dan Inter (body text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        // Skrip inline sinkronus untuk mencegah FOUC (Flash of Unstyled Content) saat memuat tema tersimpan
+        document.documentElement.classList.replace('no-js', 'js');
+        try {
+            const temaAwal = localStorage.getItem('mbantulanz-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = temaAwal;
+        } catch {
+            document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header navigasi utama dengan posisi sticky dan efek glassmorphism -->
+    <header class="atas">
+        <div class="wadah">
+            <!-- TODO: ganti dengan nama produk/layanan yang dipromosikan -->
+            <a href="#" class="merek">MBANTULANZ</a>
+            <nav>
+                <!-- Tautan navigasi internal section -->
+                <a href="#profil">Profil</a>
+                <a href="#warisan">Warisan</a>
+                <a href="#portfolio">Koleksi</a>
+                <a href="#fitur">Fitur</a>
+                <a href="#faq">FAQ</a>
+                <!-- Tombol interaktif untuk mengganti Light / Dark Mode -->
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Aktifkan mode gelap" aria-pressed="false">
+                    <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+                    <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
+                </button>
+                <a href="#daftar" class="tombol kecil">Daftar</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section Hero: Headline utama, deskripsi singkat, tombol CTA, dan metrik kredibilitas -->
+        <section class="hero">
+            <div class="wadah">
+                <h1>Kemewahan Aroma Nusantara, Terjangkau untuk Setiap Momen</h1>
+                <p>Perfume handcrafted with premium ingredients, designed for everyday luxury that doesn't break the bank</p>
+                <a href="#daftar" class="tombol">Coba Sekarang</a>
+                <div class="hero-stats">
+                    <div class="stat">100% Alami</div>
+                    <div class="stat">48 Jam Ketahanan</div>
+                    <div class="stat">12+ Variant</div>
+                    <div class="stat">50k+ Pelanggan</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Company Profile: Identitas, visi Affordable Luxury, dan badge tim eksekutif -->
+        <section id="profil" class="wadah animate-on-scroll">
+            <h2>Profil & Filosofi</h2>
+            <div class="profil-grid">
+                <div class="profil-content">
+                    <p class="profil-tagline">Affordable Luxury: Kemewahan yang Inklusif</p>
+                    <p>Mbantulanz lahir dari keinginan untuk membawa parfum kualitas haute parfumerie ke tangan setiap orang Indonesia. Kami percaya kemewahan bukan soal harga, tapi soal kualitas tanpa kompromi.</p>
+                    <ul class="nilai-inti">
+                        <li><strong>Integritas Bahan:</strong> Hanya extract alami 100%, tanpa bahan pengisi sintetis.</li>
+                        <li><strong>Warisan Artisanal:</strong> Setiap botol diracik tangan oleh master perfumer lokal.</li>
+                        <li><strong>Harga Adil:</strong> Hapus biaya pemasaran berlebihan, berikan nilai ke pelanggan.</li>
+                    </ul>
+                </div>
+                <div class="profil-badges">
+                    <div class="badge"><span>CEO & Founder</span><small>Rizki Pratama</small></div>
+                    <div class="badge"><span>Master Perfumer</span><small>Dewi Sartika</small></div>
+                    <div class="badge"><span>Art Director</span><small>Andi Nugraha</small></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Company Heritage: Perjalanan bersejarah perusahaan dengan interactive timeline -->
+        <section id="warisan" class="wadah animate-on-scroll">
+            <h2>Warisan & Cerita Kami</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-year="2020">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>2020: Awal Mula di Garasi Kecil</h3>
+                        <p>Workshop artisanal pertama dibuka di Kota Mbantul dengan 5 perfumer dan 12 karyawan.</p>
+                        <div class="achievement-details">
+                            <span>5 Perfumer</span>
+                            <span>12 Karyawan</span>
+                            <span>500jt Pendapatan</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2022">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>2022: Peluncuran Heritage Collection</h3>
+                        <p>Koleksi edisi terbatas perdana dengan 12 ramuan warisan Nusantara, fermentasi 48 jam.</p>
+                        <div class="achievement-details">
+                            <span>3 Perfumer Baru</span>
+                            <span>30 Karyawan</span>
+                            <span>2.5M Pendapatan</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2024">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>2024: Melebihi 50.000 Pelanggan Setia</h3>
+                        <p>Milestone komunitas pecinta parfum Indonesia yang memilih kualitas tanpa kompromi.</p>
+                        <div class="achievement-details">
+                            <span>7 Master Perfumer</span>
+                            <span>50+ Karyawan</span>
+                            <span>12M+ Pendapatan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Sub-brand Portfolio: Lini bisnis perusahaan dengan sistem tab interaktif -->
+        <section id="portfolio" class="wadah animate-on-scroll">
+            <h2>Portofolio Sub-brand</h2>
+            <div class="portfolio-tabs">
+                <button class="tab-button active" data-category="signature">Signature Collection</button>
+                <button class="tab-button" data-category="everyday">Everyday Luxe</button>
+                <button class="tab-button" data-category="reserve">Private Reserve</button>
+            </div>
+            <div class="portfolio-panels">
+                <div class="panel active" data-category="signature">
+                    <div class="portfolio-grid">
+                        <article class="portfolio-card">
+                            <h4>Nusantara Gold</h4>
+                            <p>Campuran 12 herba Nusantara dengan sentuhan emas</p>
+                            <ul class="highlights">
+                                <li>12 bahan alami</li>
+                                <li>Ekstraksi ganda</li>
+                                <li>Bercase eksklusif</li>
+                            </ul>
+                        </article>
+                        <article class="portfolio-card">
+                            <h4>Heritage Bronze</h4>
+                            <p>Campuran klasik dengan nuansa amber</p>
+                            <ul class="highlights">
+                                <li>10 ramuan warisan</li>
+                                <li>Fermentasi 48 jam</li>
+                                <li>Aroma dewasa</li>
+                            </ul>
+                        </article>
+                        <article class="portfolio-card">
+                            <h4>Private Reserve</h4>
+                            <p>Eksklusif terbatas, hanya untuk kolektor</p>
+                            <ul class="highlights">
+                                <li>Sumber tunggal</li>
+                                <li>Pembuatan tangan</li>
+                                <li>Plate nomor unik</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+                <div class="panel" data-category="everyday">
+                    <div class="portfolio-grid">
+                        <article class="portfolio-card">
+                            <h4>Daily Gold</h4>
+                            <p>Kemewahan harian yang terjangkau</p>
+                            <ul class="highlights">
+                                <li>Ukuran besar</li>
+                                <li>Harga ekonomis</li>
+                                <li>Universal gender</li>
+                            </ul>
+                        </article>
+                        <article class="portfolio-card">
+                            <h4>Everyday Bronze</h4>
+                            <p>Sempurna untuk pemula</p>
+                            <ul class="highlights">
+                                <li>Akses mudah</li>
+                                <li>Kualitas premium</li>
+                                <li>Starter kit</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+                <div class="panel" data-category="reserve">
+                    <div class="portfolio-grid">
+                        <article class="portfolio-card">
+                            <h4>Master Perfumer</h4>
+                            <p>Hanya tersedia di acara khusus</p>
+                            <ul class="highlights">
+                                <li>Eksklusif</li>
+                                <li>Bahan langka</li>
+                                <li>Tersegel</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Fitur: Menampilkan keunggulan produk -->
+        <section id="fitur" class="wadah">
+            <h2>Fitur</h2>
+            <!-- Kartu fitur diisi oleh script.js -->
+            <div id="daftar-fitur" class="grid"></div>
+        </section>
+
+        <!-- Section FAQ: Pertanyaan umum menggunakan elemen natif <details> dan <summary> -->
+        <section id="faq" class="wadah">
+            <h2>Pertanyaan yang Sering Diajukan</h2>
+            <details>
+                <summary>Apa yang membuat Mbantulanz berbeda?</summary>
+                <p>Kami memadukan bahan alami pilihan Nusantara, proses artisanal, dan harga yang adil agar kualitas parfum premium bisa dinikmati lebih banyak orang.</p>
+            </details>
+            <details>
+                <summary>Bagaimana ketahanan parfum Mbantulanz?</summary>
+                <p>Formula kami dirancang untuk bertahan hingga 48 jam, bergantung pada jenis kulit, cuaca, dan cara pemakaian.</p>
+            </details>
+            <details>
+                <summary>Apakah tersedia kemitraan?</summary>
+                <p>Ya. Program kemitraan tersedia untuk retail, hospitality, dan corporate gifting. Daftarkan minat melalui formulir untuk mendapat informasi berikutnya.</p>
+            </details>
+            <details>
+                <summary>Sub-brand mana yang cocok untuk pemula?</summary>
+                <p>Everyday Luxe menawarkan aroma serbaguna dengan harga terjangkau. Mulai dari Everyday Bronze untuk mengenal karakter aroma Mbantulanz.</p>
+            </details>
+        </section>
+
+        <!-- Section Pendaftaran: Formulir input interaktif dengan validasi HTML5 -->
+        <section id="daftar" class="wadah animate-on-scroll">
+            <div class="registration-layout">
+                <div class="registration-copy">
+                    <p class="profil-tagline">Mulai Perjalanan Aromamu</p>
+                    <h2>Temukan signature scent yang terasa seperti dirimu</h2>
+                    <p>Dapatkan akses awal ke koleksi terbaru, undangan private smelling session, dan penawaran khusus dari Mbantulanz.</p>
+                </div>
+                <!-- Form registrasi dengan validasi bawaan (novalidate untuk kontrol JS & checkValidity) -->
+                <form id="form-daftar" class="kartu form" novalidate>
+                    <label>Nama <input name="nama" required autocomplete="name"></label>
+                    <label>Email <input name="email" type="email" required autocomplete="email"></label>
+                    <p id="pesan" class="pesan" hidden></p>
+                    <button type="submit">Kirim</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer: Hak cipta dan navigasi tautan cepat -->
+    <footer class="bawah">
+        <div class="wadah">
+            <span>© 2025 Mbantulanz Parfum · Mini Hackathon Teknologi Web · Nama Kelompok</span>
+            <nav aria-label="Navigasi footer">
+                <a href="#profil">Profil</a>
+                <a href="#portfolio">Koleksi</a>
+                <a href="#daftar">Kemitraan</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Skrip logika interaktif frontend -->
+    <script src="script.js"></script>
+</body>
+</html>
